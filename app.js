@@ -2,6 +2,10 @@
  *
  * @returns A promise that is designed to resolve with a list of hobbits, or potentially fail with an failure object. The failure object includes a boolean success property and a string message property.
  */
+
+const para = document.getElementById("error");
+const uList = document.getElementById("list");
+
 function getList() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -17,8 +21,24 @@ function getList() {
 
 // TODO: Handle the resolved or rejected states of the promise
 
-// TODO: If the promise resolves with the list of hobbits
-// Render the list of hobbits as list items within the unordered list with id="list" (check the index.html file)
+getList()
+  .then((resValue) => {
 
-// TODO: If the promise rejects with the failure object
-// Display the failure message in the paragraph element with id="error" (check index.html file)
+    // TODO: If the promise resolves with the list of hobbits
+    // Render the list of hobbits as list items within the unordered list with id="list" (check the index.html file)
+
+    resValue.forEach((element) => {
+      const li = document.createElement("li");
+      li.textContent = element;
+      uList.appendChild(li);
+    });
+  }).catch((rejValue) => {
+    console.log(rejValue);
+
+    // TODO: If the promise rejects with the failure object
+    // Display the failure message in the paragraph element with id="error" (check index.html file)
+    para.textContent = "Message: " + rejValue.message;
+    
+  });
+
+
